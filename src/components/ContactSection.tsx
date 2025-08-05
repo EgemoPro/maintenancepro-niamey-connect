@@ -46,7 +46,7 @@ const ContactSection = () => {
     {
       icon: <Phone className="w-6 h-6 text-accent" />,
       title: "Téléphone",
-      value: "+227 XX XX XX XX",
+      value: "+227 92220761",
       description: "Disponible 7j/7"
     },
     {
@@ -117,7 +117,7 @@ const ContactSection = () => {
               </h4>
               <Button 
                 className="bg-green-600 hover:bg-green-700 text-white font-semibold px-8 py-3"
-                onClick={() => window.open('https://wa.me/227XXXXXXXX', '_blank')}
+                onClick={() => window.open('https://wa.me/22792220761', '_blank')}
               >
                 <Phone className="w-4 h-4 mr-2" />
                 Contacter via WhatsApp
@@ -166,7 +166,7 @@ const ContactSection = () => {
                         type="tel"
                         value={formData.phone}
                         onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                        placeholder="+227 XX XX XX XX"
+                        placeholder="+227 92220761"
                       />
                     </div>
                   </div>
@@ -213,14 +213,17 @@ const ContactSection = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="bg-secondary/50 h-64 rounded-lg flex items-center justify-center">
-                <div className="text-center">
-                  <MapPin className="w-12 h-12 text-accent mx-auto mb-4" />
-                  <h4 className="font-semibold text-primary mb-2">Niamey, Niger</h4>
-                  <p className="text-muted-foreground">
-                    Intervention dans toute la ville et les communes environnantes
-                  </p>
-                </div>
+              <div className="rounded-lg overflow-hidden">
+                <iframe 
+                  src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1742.6539022505492!2d2.180783443002741!3d13.459115635455044!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sfr!2sne!4v1754404646839!5m2!1sfr!2sne" 
+                  width="100%" 
+                  height="400" 
+                  style={{border: 0}} 
+                  allowFullScreen 
+                  loading="lazy" 
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Localisation MAINTENANCEPROSERVICE"
+                ></iframe>
               </div>
             </CardContent>
           </Card>
