@@ -7,6 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowLeft, ArrowRight, CheckCircle, Calendar, User, FileText } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 interface FormData {
   // Étape 1: Détails de la panne
@@ -62,23 +63,26 @@ const AppointmentForm = () => {
   const handleSubmit = async () => {
     setIsSubmitting(true);
     
-    // Simulation d'envoi email (en production, utiliser un service d'email)
     try {
-      // Ici vous pouvez intégrer un service d'email comme EmailJS ou un backend
-      console.log("Données du formulaire:", formData);
+      // Envoi des données via Supabase Edge Function
+      const { data, error } = await supabase.functions.invoke('send-appointment', {
+        body: formData
+      });
       
-      // Simulation d'un délai d'envoi
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      if (error) {
+        throw error;
+      }
       
       setIsSubmitted(true);
       toast({
         title: "Demande envoyée !",
-        description: "Votre demande de rendez-vous a été envoyée avec succès.",
+        description: "Votre demande de rendez-vous a été envoyée avec succès. Nous vous contacterons sous 24h.",
       });
-    } catch (error) {
+    } catch (error: any) {
+      console.error("Erreur lors de l'envoi:", error);
       toast({
         title: "Erreur",
-        description: "Une erreur s'est produite lors de l'envoi.",
+        description: error.message || "Une erreur s'est produite lors de l'envoi.",
         variant: "destructive",
       });
     } finally {
